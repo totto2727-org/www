@@ -40,6 +40,8 @@ const reveal = document.querySelector(".reveal");
 if(reveal) {
     const deck = new Reveal({
         plugins: [Markdown],
+		hash: true,
+		hashOneBasedIndex: true,
     });
     deck.initialize();
 }

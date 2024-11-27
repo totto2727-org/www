@@ -1,0 +1,31 @@
+---
+import { CardGrid, LinkCard } from "@astrojs/starlight/components"
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro"
+import type { ComponentProps } from "astro/types"
+import { getSlides } from "./_repository/getSlides"
+
+const slides = await getSlides()
+const title = "Slide"
+
+const props = {
+	frontmatter: {
+		title,
+		template:"splash",
+		prev: false,
+		next: false,
+	},
+	hasSidebar: true,
+} satisfies ComponentProps<typeof StarlightPage>
+---
+
+<StarlightPage {...props}>
+	<CardGrid>
+		{
+			slides.map((slide) => ((
+			(
+<LinkCard title={slide.data.title} href={slide.slug} />
+			)
+			)))
+		}
+	</CardGrid>
+</StarlightPage>

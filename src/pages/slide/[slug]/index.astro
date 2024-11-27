@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content"
+import { getSlides } from "../_repository/getSlides"
 import Layout from "./_component/Layout.astro"
 import Slide from "./_component/Slide.astro"
 
@@ -8,7 +8,7 @@ type Params = {
 }
 
 export async function getStaticPaths() {
-	const slideList = await getCollection("slide")
+	const slideList = await getSlides()
 	return slideList.map(
 		(slide) =>
 			({
