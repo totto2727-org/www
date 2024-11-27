@@ -1,0 +1,46 @@
+---
+import rehypeParse from "rehype-parse"
+import rehypeRemark from "rehype-remark"
+import remarkStringify from "remark-stringify"
+import { unified } from "unified"
+import "./reveal.css"
+
+// slotで受け取ったコンポーネントをレンダリング. 詳細は以下リンク参照
+// https://docs.astro.build/en/reference/api-reference/#astroslotsrender
+const html = await Astro.slots.render("default")
+
+// biome-ignore lint/style/useConst: <explanation>
+let markdown = (
+	await unified()
+		.use(rehypeParse)
+		.use(rehypeRemark)
+		.use(remarkStringify)
+		.process(html)
+)
+	.toString()
+	.replace(/\*\*\*/g, "---")
+	.replace(/\[#]\(#[^\)]*\)/g, "")
+// markdown->htmlの変換時にheading tagの追加など余分な処理が入っているので、修正
+---
+
+<div class="reveal">
+	<div class="slides">
+		<section data-markdown>
+			<textarea data-template set:html={markdown}>
+            </textarea>
+		</section>
+	</div>
+</div>
+
+<script>
+import { default as Reveal } from "reveal.js";
+import { default as Markdown } from "reveal.js/plugin/markdown/markdown.esm.js";
+
+const reveal = document.querySelector(".reveal");
+if(reveal) {
+    const deck = new Reveal({
+        plugins: [Markdown],
+    });
+    deck.initialize();
+}
+</script>

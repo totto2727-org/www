@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content"
+import Layout from "./_component/Layout.astro"
+import Slide from "./_component/Slide.astro"
+
+type Params = {
+	slug: string
+}
+
+export async function getStaticPaths() {
+	const slideList = await getCollection("slide")
+	return slideList.map(
+		(slide) =>
+			({
+				params: { slug: "example" },
+				props: { frontmatter: slide.data, render: slide.render },
+			}) satisfies Record<string, unknown> & { params: Params },
+	)
+}
+
+const { props } = Astro
+const { Content } = await props.render()
+---
+
+<Layout frontmatter={props.frontmatter}>
+	<Slide>
+		<Content />
+	</Slide>
+</Layout>

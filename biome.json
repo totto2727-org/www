@@ -2,7 +2,7 @@
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"files": {
 		"ignoreUnknown": true,
-		"ignore": ["**/pnpm-lock.yaml"]
+		"ignore": ["**/pnpm-lock.yaml", "**/reveal.css"]
 	},
 	"vcs": {
 		"enabled": true,
@@ -28,5 +28,18 @@
 		"formatter": {
 			"semicolons": "asNeeded"
 		}
-	}
+	},
+	"overrides": [
+		{
+			"include": ["*.astro"],
+			"linter": {
+				"rules": {
+					"recommended": true,
+					"style": {
+						"useImportType": "off"
+					}
+				}
+			}
+		}
+	]
 }
