@@ -9,7 +9,7 @@ import Icons from "unplugin-icons/vite"
 import { customCollections } from "#@/feature/primitive/icon-unocss.js"
 
 export default defineConfig({
-	site: "https://www.totto2727.com",
+	site: "https://www.totto2727.dev",
 	integrations: [
 		svelte(),
 		UnoCSS({ injectReset: true }),

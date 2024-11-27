@@ -23,7 +23,12 @@ const props = {
 		{
 			slides.map((slide) => ((
 			(
-<LinkCard title={slide.data.title} href={`/slide/${slide.slug}`} />
+(
+				<LinkCard
+					title={slide.data.title}
+					href={`/${slide.slug}`	}
+				/>
+			)
 			)
 			)))
 		}
