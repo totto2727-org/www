@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 	return slideList.map(
 		(slide) =>
 			({
-				params: { slug: "example" },
+				params: { slug: slide.slug.replace("slide/", "") },
 				props: { frontmatter: slide.data, render: slide.render },
 			}) satisfies Record<string, unknown> & { params: Params },
 	)
