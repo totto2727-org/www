@@ -1,11 +1,15 @@
 ---
 id: 20241206214713
 slug: svelte-eliminates-the-need-for-hoge
-title: React使いが語る<wbr>Svelteなら<wbr>〇〇が要らない
+title: React使いが語る<wbr/>Svelteなら<wbr/>〇〇が要らない
 author: totto2727
 date: 2024-12-06
 tags: [Svelte, React, TypeScript]
 ---
+
+import Br from "#@/feature/talk/component/Br.astro"
+import Wbr from "#@/feature/talk/component/Wbr.astro"
+import TextCenter from "#@/feature/talk/component/TextCenter.astro"
 
 ## まとめ
 
@@ -49,7 +53,7 @@ tags: [Svelte, React, TypeScript]
 </style>
 ```
 
-<t-align-center>しかも未使用のCSSを<br class="slide-only">静的解析で検出できる！</t-align-center>
+<TextCenter>しかも未使用のCSSを<Br />静的解析で検出できる！</TextCenter>
 
 ---
 
@@ -77,11 +81,11 @@ tags: [Svelte, React, TypeScript]
 </svelte-css-wrapper>
 ```
 
-<t-align-center>※ SliderコンポーネントのPropsに<br class="slide-only">渡すわけではない</t-align-center>
+<TextCenter>※ SliderコンポーネントのPropsに<Br />渡すわけではない</TextCenter>
 
 ---
 
-### もし構造を維持したいなら<wbr>（標準タグが使える場合）
+### もし構造を維持したいなら<wbr/>（標準タグが使える場合）
 
 ```svelte
 <input
@@ -161,9 +165,9 @@ import { myGlobalState } from "./state.svelte";
 </script>;
 ```
 
-<t-align-center>Signalはどこでも定義可能</t-align-center>
+<TextCenter>Signalはどこでも定義可能</TextCenter>
 
-<t-align-center>自然とJotaiっぽくなる</t-align-center>
+<TextCenter>自然とJotaiっぽくなる</TextCenter>
 
 ---
 
@@ -212,7 +216,7 @@ $effect(() => {
 <canvas bind:this={canvas} width="100" height="100" />
 ```
 
-<t-align-center>依存に含めたくない場合は<br class="slide-only">`untrack`関数を使います</t-align-center>
+<TextCenter>依存に含めたくない場合は<Br />`untrack`関数を使います</TextCenter>
 
 ---
 
@@ -228,11 +232,11 @@ let { data }: { data: PageData } = $props();
 </script>
 ```
 
-<t-align-center>[https://svelte.dev/docs/kit/types](https://svelte.dev/docs/kit/types)</t-align-center>
+<TextCenter>[https://svelte.dev/docs/kit/types](https://svelte.dev/docs/kit/types)</TextCenter>
 
 ---
 
-## Tanstack Query（SWR）が<br>要らない
+## Tanstack Query（SWR）が<wbr/>要らない
 
 ```svelte
 {#await promise}
@@ -247,41 +251,38 @@ let { data }: { data: PageData } = $props();
 {/await}
 ```
 
-revalidateなどが不要であればこれで十分
+<TextCenter>revalidateなどが不要ならこれで十分</TextCenter>
 
-更新もシンプルなものなら<br class="slide-only">Promiseに再代入するだけでOK
+<TextCenter>更新もシンプルなものなら<Br />Promiseに再代入するだけでOK</TextCenter>
 
 ---
 
 ## 仮想DOMが要らない
 
-真なるリアクティブ
+<TextCenter>真なるリアクティブ</TextCenter>
 
-<t-align-center>[参考資料](https://speakerdeck.com/ssssota/the-next-chapter-of-declarative-ui)</t-align-center>
+<TextCenter>[参考資料](https://speakerdeck.com/ssssota/the-next-chapter-of-declarative-ui)</TextCenter>
 
 ---
 
 ## 最後に
 
-<div class="list">
+<div class:list={[
+	"[.reveal_&_li]:(text-[0.85em] leading-[1.5])",
+	"[.reveal_&_li_li]:(text-[1em])",
+]}>
 
-<style>
-	.reveal .list li {
-		font-size: 0.85em;
-		line-height: 1.5;
+<TextCenter>
 
-		li {
-			font-size: 1em
-		}
-	}
-</style>
-
-- SvelteはWeb開発に必要なものを標準で揃えているイメージ
-  - Reactでちょっと欲しくユーティリティが標準機能としてあるような印象
-  - 小さいアプリならReactより少ない依存で解決できる気がする
-- Svelte v5のRuneでReactに近い書き心地になっている
+- SvelteはWeb開発に必要なものが最低限揃っている
+  - Reactでよく使うユーティリティが標準実装
+  - シンプルなLPなら追加の依存なしで作れそう
+- Svelte v5のRuneはReactに近い書き心地
   - 今までHookのような定義は少し癖があった
+  - あらゆるフレームワークのいいとこどり
 - 学習コストはそんな高くない（ライフサイクルも素直）
-- Svelte kitはまだあまり触れていないが、仕組み自体はかなりシンプル
+- Svelte kitはまだあまり触れていないが、<Br />仕組み自体はかなりシンプル
+
+</TextCenter>
 
 </div>

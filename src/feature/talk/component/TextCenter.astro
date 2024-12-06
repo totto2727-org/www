@@ -1,0 +1,27 @@
+---
+type Props = {
+	textAlign?: "center" | "left"
+}
+
+const { props } = Astro
+const textAlign = props.textAlign ?? "center"
+---
+
+<p data-text-align={textAlign}><slot /></p>
+
+<style>
+:global(.reveal) p {
+	margin-inline: auto;
+	display: block;
+	width: fit-content;
+	text-align: var(--text-align) !important;
+
+	&[data-text-align="center"] {
+		text-align: center !important;
+	}
+
+	&[data-text-align="left"] {
+		text-align: left !important;
+	}
+}
+</style>

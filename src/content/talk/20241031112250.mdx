@@ -1,0 +1,89 @@
+---
+id: 20241031112257
+slug: oci-starting-an-extraordinary-misfamily
+title: OCIで始める<wbr/>逸般の誤家庭
+author: totto2727
+date: 2024-10-31
+tags: [OCI, 自宅サーバ, 逸般の誤家庭, Tailscale, Cloudflare]
+---
+
+import Br from "#@/feature/talk/component/Br.astro"
+import Wbr from "#@/feature/talk/component/Wbr.astro"
+import TextCenter from "#@/feature/talk/component/TextCenter.astro"
+
+## 自宅サーバ始めたい人の悩み
+
+- 自宅サーバ始めたい
+- いきなりネットワーク機器買い揃えるのは怖い
+- なるべく費用は抑えたい
+
+---
+
+## そこでOCIの登場
+
+- 無料枠が半端ないArmインスタンス
+  - 4OCPU(8スレッド)
+  - メモリ24GB
+  - ストレージ200GB
+  - (1OCPU 24GB 50GB) * 4構成とかも可能
+- 無難なx84-64インスタンス
+  - 1OCPU 1GB のインスタンスが2つまで無料
+  - AWSのmicroインスタンスより強い
+
+---
+
+## 注意点
+
+- ストレージは最低47GB必要
+  - 無料枠では最大4つまで
+
+---
+
+## なんだかんだ課金されない？
+
+<TextCenter>
+
+- アウトバウンド10TBまで無料
+- 自宅サーバの文脈からは外れるけど…
+  - オブジェクトストレージとかDBも<Br/>ある程度無料で試せる
+
+</TextCenter>
+
+<TextCenter>https://www.oracle.com/jp/cloud/free/</TextCenter>
+
+---
+
+## 安全に運用するために
+
+<TextCenter>基本的にIngressのポートは全て拒否したうえで…</TextCenter>
+
+<TextCenter>
+- Tailscale
+  - P2Pで構成されるVPN
+  - Tailscaleの認証経由でSSHとかもできます
+- Cloudflare Tunnel
+  - Cloudflare経由でプライベートなサーバに<Br/>アクセスできるサービス
+  - CloudflareのWAFやFirewallも適用されるため<Br/>DDOSも多分なんとかなる
+</TextCenter>
+---
+
+## Next Action
+
+<TextCenter>便利ですが無料では限界があります</TextCenter>
+
+<TextCenter>
+
+- ストレージが合わせて200GB
+- インスタンス数は4つまで
+
+</TextCenter>
+
+<TextCenter>今後も継続してクラウドを利用するか、自宅にサーバを置くかニーズに合わせて調整しましょう</TextCenter>
+
+---
+
+## 参考資料
+
+<TextCenter>[自宅サーバー沼を潜り抜けた人が作る<wbr/>モダンなインフラとは？【突撃!逸般の誤家庭#7】](https://www.youtube.com/watch?v=RRqTR3wL8MY)</TextCenter>
+
+<TextCenter><iframe width="560" height="315" src="https://www.youtube.com/embed/RRqTR3wL8MY?si=fblfpWLJErR14KYa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></TextCenter>

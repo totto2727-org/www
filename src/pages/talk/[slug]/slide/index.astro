@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 				props: {
 					slug: slide.slug,
 					frontmatter: {
-						title: slide.data.title.replaceAll("<wbr>", ""),
+						title: slide.data.title.replaceAll("<wbr/>", ""),
 					},
 					slideTitle: slide.data.title,
 					render: slide.render,
