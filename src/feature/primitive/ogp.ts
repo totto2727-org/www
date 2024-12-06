@@ -1,6 +1,7 @@
 // @ts-ignore Astro ComponentProps
 import type StarlightPage from "@astrojs/starlight/components/StarlightPage.astro"
 import type { ComponentProps } from "astro/types"
+import { P, S } from "#@/feature/effect.js"
 
 export function generateOgpObject({
 	image,
@@ -38,7 +39,7 @@ export function generateOgpObject({
 		},
 	] satisfies ComponentProps<typeof StarlightPage>["frontmatter"]["head"]
 
-	if (description) {
+	if (P.isNotNullable(description) && S.isNonEmpty(description)) {
 		ogp.push({
 			tag: "meta",
 			attrs: { property: "og:description", content: description },
@@ -46,7 +47,7 @@ export function generateOgpObject({
 	}
 
 	// Astroで自動生成される
-	if (url) {
+	if (P.isNotNullable(url)) {
 		ogp.push({
 			tag: "meta",
 			attrs: { property: "og:url", content: url.href },

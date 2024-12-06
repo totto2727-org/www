@@ -23,7 +23,7 @@ export function generateOgImage(titleSplitted: string[]) {
 			}}
 		>
 			{titleSplitted.map((title) => (
-				// biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
+				// biome-ignore lint/correctness/useJsxKeyInIterable: non necessary
 				<div>{title}</div>
 			))}
 			<div
