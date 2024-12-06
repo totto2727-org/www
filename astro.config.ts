@@ -29,6 +29,12 @@ const starlightConfig = {
 	],
 	customCss: ["./src/feature/primitive/global.css"],
 	lastUpdated: true,
+	locales: {
+		root: {
+			label: "日本語",
+			lang: "ja",
+		},
+	},
 } satisfies Parameters<typeof starlight>[0]
 
 const vite = {
