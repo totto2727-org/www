@@ -11,7 +11,7 @@ import { customCollections } from "#@/feature/primitive/icon-unocss.js"
 const starlightConfig = {
 	title: "とっとの適当ブログ？",
 	logo: {
-		src: "/src/assets/houston.webp",
+		src: "/src/assets/totto2727.webp",
 		replacesTitle: true,
 	},
 	social: {
@@ -21,6 +21,10 @@ const starlightConfig = {
 		{
 			label: "Talk",
 			link: "/talk",
+		},
+		{
+			label: "Article",
+			link: "/article",
 		},
 	],
 	customCss: ["./src/feature/primitive/global.css"],

@@ -6,3 +6,7 @@ https://github.com/withastro/starlight/pull/694
 	/* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
 	navigation: auto;
 }
+
+.slide-only {
+	display: none;
+}

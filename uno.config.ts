@@ -1,3 +1,4 @@
+import presetTagify from "@unocss/preset-tagify"
 import {
 	defineConfig,
 	mergeConfigs,
@@ -6,7 +7,6 @@ import {
 	transformerDirectives,
 	transformerVariantGroup,
 } from "unocss"
-
 import { customCollections } from "./src/feature/primitive/icon-unocss.js"
 
 export default mergeConfigs([
@@ -22,6 +22,7 @@ export default mergeConfigs([
 			presetIcons({
 				collections: customCollections,
 			}),
+			presetTagify(),
 		],
 	}),
 ])

@@ -2,7 +2,7 @@
 import { LinkButton } from "@astrojs/starlight/components"
 import TalkSlide from "#@/feature/talk/component/TalkSlide.astro"
 import TalkSlideLayout from "#@/feature/talk/component/TalkSlideLayout.astro"
-import { findTalkMany } from "#@/feature/talk/repository/getSlides.js"
+import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
 import { getTalkArticlePath } from "../_lib"
 
 type Params = {
@@ -10,7 +10,7 @@ type Params = {
 }
 
 export async function getStaticPaths() {
-	const slideList = await findTalkMany()
+	const slideList = await findManyTalk()
 	return slideList.map(
 		(slide) =>
 			({

@@ -1,4 +1,5 @@
 ---
+import { SLIDE_HEIGHT, SLIDE_WIDTH } from "./const"
 import "./reveal.css"
 
 type Props = {
@@ -12,7 +13,14 @@ const slidesHtml = html
 	.map((html) => `<section>${html}</section>`)
 ---
 
-<div class="reveal" data-initialized="false">
+<div
+	class="reveal"
+	data-initialized="false"
+	style={{
+		"--slide-width": `${SLIDE_WIDTH}px`,
+		"--slide-height": `${SLIDE_HEIGHT}px`,
+	}}
+>
 	<div class="slides">
 		<section>
 			<h1><Fragment set:html={props.title} /></h1>
@@ -25,6 +33,7 @@ const slidesHtml = html
 <script>
 import { default as Reveal } from "reveal.js";
 import { default as Markdown } from "reveal.js/plugin/markdown/markdown.esm.js";
+import { SLIDE_HEIGHT, SLIDE_WIDTH } from "./const";
 
 const reveal = document.querySelector(".reveal") as HTMLElement;
 if(reveal) {
@@ -32,7 +41,9 @@ if(reveal) {
         plugins: [Markdown],
 		hash: true,
 		hashOneBasedIndex: true,
-    });
+		width: SLIDE_WIDTH,
+		height: SLIDE_HEIGHT,
+	});
 	deck.initialize().then(() => {
 		reveal.dataset.initialized = "true"
 	})

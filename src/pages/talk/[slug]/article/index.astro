@@ -1,7 +1,7 @@
 ---
 import { LinkButton } from "@astrojs/starlight/components"
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro"
-import { findTalkMany } from "#@/feature/talk/repository/getSlides.js"
+import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
 import { getTalkSlidePath } from "../_lib"
 
 type Params = {
@@ -9,7 +9,7 @@ type Params = {
 }
 
 export async function getStaticPaths() {
-	const talkList = await findTalkMany()
+	const talkList = await findManyTalk()
 	return talkList.map(
 		(talk) =>
 			({
@@ -17,6 +17,7 @@ export async function getStaticPaths() {
 					slug: talk.slug,
 				},
 				props: {
+					id: talk.id,
 					slug: talk.slug,
 					frontmatter: {
 						title: talk.data.title.replaceAll("<wbr>", ""),
@@ -32,8 +33,17 @@ const { Content, headings } = await props.render()
 ---
 
 <StarlightPage frontmatter={props.frontmatter} headings={headings}>
+	<div>{`File ID: ${props.id}`}</div>
 	<div>
 		<LinkButton href={getTalkSlidePath(props.slug)}>スライドモード</LinkButton>
 	</div>
+	<hr />
 	<Content />
 </StarlightPage>
+
+<style is:global>
+iframe {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+}
+</style>
