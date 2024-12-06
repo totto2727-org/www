@@ -5,3 +5,7 @@ export const getTalkArticlePath = (slug: string) => {
 export const getTalkSlidePath = (slug: string) => {
 	return `/talk/${slug}/slide`
 }
+
+export function getTalkOgpImagePath(slug: string) {
+	return `/talk/${slug}/ogp.png`
+}

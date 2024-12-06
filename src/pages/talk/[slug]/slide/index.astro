@@ -3,7 +3,7 @@ import { LinkButton } from "@astrojs/starlight/components"
 import TalkSlide from "#@/feature/talk/component/TalkSlide.astro"
 import TalkSlideLayout from "#@/feature/talk/component/TalkSlideLayout.astro"
 import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
-import { getTalkArticlePath } from "../_lib"
+import { getTalkArticlePath, getTalkOgpImagePath } from "../_lib"
 
 type Params = {
 	slug: string
@@ -29,9 +29,16 @@ export async function getStaticPaths() {
 
 const { props } = Astro
 const { Content } = await props.render()
+const ogpImagePath = getTalkOgpImagePath(props.slug)
+const ogpImageUrl = new URL(ogpImagePath, Astro.url).href
 ---
 
-<TalkSlideLayout frontmatter={props.frontmatter}>
+<TalkSlideLayout
+	frontmatter={{
+		...props.frontmatter,
+		head: [{ tag: "meta", attrs: { property: "og:image", content: ogpImageUrl } }],
+	}}
+>
 	<TalkSlide title={props.slideTitle}>
 		<Content />
 	</TalkSlide>

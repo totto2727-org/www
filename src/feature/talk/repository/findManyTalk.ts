@@ -1,6 +1,7 @@
 import { getCollection } from "astro:content"
 
-export function findManyTalk() {
+// TODO: Add Return type
+export async function findManyTalk() {
 	return getCollection("talk").then((talks) => {
 		return talks
 			.filter((talk) => talk.data.draft === false)

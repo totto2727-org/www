@@ -1,6 +1,7 @@
 import { getCollection } from "astro:content"
 
-export function findManyArticle() {
+// TODO: Add Return type
+export async function findManyArticle() {
 	return getCollection(
 		"docs",
 		(article) =>
