@@ -1,6 +1,8 @@
 ---
 import { LinkButton } from "@astrojs/starlight/components"
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro"
+import { generateTitle } from "#@/const.js"
+import { generateOgpObject } from "#@/feature/primitive/ogp.js"
 import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
 import { getTalkOgpImagePath, getTalkSlidePath } from "../_lib"
 
@@ -31,19 +33,18 @@ export async function getStaticPaths() {
 const { props } = Astro
 const { Content, headings } = await props.render()
 const ogpImagePath = getTalkOgpImagePath(props.slug)
-const ogpImageUrl = new URL(ogpImagePath, Astro.url).href
+const ogpImageUrl = new URL(ogpImagePath, Astro.url)
 ---
 
 <StarlightPage
-	frontmatter={{ ...props.frontmatter,head:[
-		{
-			tag: "meta",
-			attrs: {
-				property: "og:image",
-				content: ogpImageUrl,
-			},
-		},
-	]}}
+	frontmatter={{
+		...props.frontmatter,
+		head: generateOgpObject({
+			title: generateTitle(props.frontmatter.title),
+			image: ogpImageUrl,
+			alt: props.frontmatter.title,
+		}),
+	}}
 	headings={headings}
 >
 	<div>{`File ID: ${props.id}`}</div>

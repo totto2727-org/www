@@ -1,6 +1,6 @@
 import type { APIContext } from "astro"
+import { generateOgImage } from "#@/feature/primitive/ogImage.jsx"
 import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
-import { generateTalkOgpImage } from "./_lib.ogp"
 
 export async function getStaticPaths() {
 	const talkList = await findManyTalk()
@@ -20,5 +20,5 @@ export async function GET(context: APIContext) {
 		ReturnType<typeof getStaticPaths>
 	>[number]["props"]
 
-	return generateTalkOgpImage(props.titleSplitted)
+	return generateOgImage(props.titleSplitted)
 }

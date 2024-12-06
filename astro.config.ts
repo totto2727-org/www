@@ -6,10 +6,12 @@ import browserslist from "browserslist"
 import { browserslistToTargets } from "lightningcss"
 import UnoCSS from "unocss/astro"
 import Icons from "unplugin-icons/vite"
+import { SITE, TITLE } from "#@/const.js"
 import { customCollections } from "#@/feature/primitive/icon-unocss.js"
+import { generateOgpObject } from "#@/feature/primitive/ogp.js"
 
 const starlightConfig = {
-	title: "とっとの適当ブログ？",
+	title: TITLE,
 	logo: {
 		src: "/src/assets/totto2727.webp",
 		replacesTitle: true,
@@ -43,6 +45,11 @@ const starlightConfig = {
 }
 `.trim(),
 		},
+		...generateOgpObject({
+			title: TITLE,
+			image: new URL("/ogp.png", SITE),
+			alt: TITLE,
+		}),
 	],
 } satisfies Parameters<typeof starlight>[0]
 
@@ -79,7 +86,7 @@ export default defineConfig({
 		prefetchAll: true,
 		defaultStrategy: "viewport",
 	},
-	site: "https://www.totto2727.dev",
+	site: SITE,
 	integrations: [svelte(), UnoCSS(), starlight(starlightConfig), mdx()],
 	vite,
 })

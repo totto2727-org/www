@@ -5,7 +5,7 @@ import React from "react"
 
 import { ImageResponse } from "@vercel/og"
 
-export function generateTalkOgpImage(titleSplitted: string[]) {
+export function generateOgImage(titleSplitted: string[]) {
 	return new ImageResponse(
 		<div
 			style={{
