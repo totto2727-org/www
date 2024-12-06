@@ -4,13 +4,13 @@ import {
 	type StarlightPageProps as Props,
 	generateStarlightPageRouteData,
 } from "#@/../node_modules/@astrojs/starlight/utils/starlight-page.js"
-import Page from "./Page.astro"
+import TalkSlidePage from "./TalkSlidePage.astro"
 
 export type StarlightPageProps = Props
 ---
 
-<Page
+<TalkSlidePage
 	{...await generateStarlightPageRouteData({ props: Astro.props, url: Astro.url })}
 >
-		<slot />
-</Page>
+	<slot />
+</TalkSlidePage>

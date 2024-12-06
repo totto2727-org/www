@@ -1,0 +1,49 @@
+---
+import { LinkButton } from "@astrojs/starlight/components"
+import TalkSlide from "#@/feature/talk/component/TalkSlide.astro"
+import TalkSlideLayout from "#@/feature/talk/component/TalkSlideLayout.astro"
+import { findTalkMany } from "#@/feature/talk/repository/getSlides.js"
+import { getTalkArticlePath } from "../_lib"
+
+type Params = {
+	slug: string
+}
+
+export async function getStaticPaths() {
+	const slideList = await findTalkMany()
+	return slideList.map(
+		(slide) =>
+			({
+				params: { slug: slide.slug.replace("talk/article", "") },
+				props: {
+					slug: slide.slug,
+					frontmatter: {
+						title: slide.data.title.replaceAll("<wbr>", ""),
+					},
+					slideTitle: slide.data.title,
+					render: slide.render,
+				},
+			}) satisfies Record<string, unknown> & { params: Params },
+	)
+}
+
+const { props } = Astro
+const { Content } = await props.render()
+---
+
+<TalkSlideLayout frontmatter={props.frontmatter}>
+	<TalkSlide title={props.slideTitle}>
+		<Content />
+	</TalkSlide>
+	<div class="button-container">
+		<LinkButton href={getTalkArticlePath(props.slug)}>記事に戻る</LinkButton>
+	</div>
+</TalkSlideLayout>
+
+<style>
+.button-container {
+	position: absolute;
+	bottom: calc(1.4em - (51px - 36px) / 2);
+	left: 0.75em;
+}
+</style>

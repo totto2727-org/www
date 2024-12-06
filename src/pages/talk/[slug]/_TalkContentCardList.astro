@@ -1,0 +1,21 @@
+---
+import { CardGrid, LinkCard } from "@astrojs/starlight/components"
+import { findTalkMany } from "#@/feature/talk/repository/getSlides.js"
+
+const slides = await findTalkMany()
+---
+
+<CardGrid>
+	{/* バグでフォーマットが安定しない */}
+	<!-- markup-fmt-ignore -->
+	{
+		slides.map((slide) => (
+			(
+			<LinkCard
+				title={slide.data.title}
+				href={`/talk/${slide.slug}/article`}
+			/>
+		)
+		))
+	}
+</CardGrid>

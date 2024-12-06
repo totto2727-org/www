@@ -8,7 +8,6 @@
 		"useTabs": true
 	},
 	"markup": {
-		"whitespaceSensitivity": "strict",
 		"useTabs": true
 	},
 	"yaml": {},

@@ -1,0 +1,40 @@
+---
+import "./reveal.css"
+
+type Props = {
+	title: string
+}
+
+const { props } = Astro
+const html = (await Astro.slots.render("default")) as string
+const slidesHtml = html
+	.split("<hr>")
+	.map((html) => `<section>${html}</section>`)
+---
+
+<div class="reveal" data-initialized="false">
+	<div class="slides">
+		<section>
+			<h1><Fragment set:html={props.title} /></h1>
+		</section>
+
+		<Fragment set:html={slidesHtml} />
+	</div>
+</div>
+
+<script>
+import { default as Reveal } from "reveal.js";
+import { default as Markdown } from "reveal.js/plugin/markdown/markdown.esm.js";
+
+const reveal = document.querySelector(".reveal") as HTMLElement;
+if(reveal) {
+     const deck = new Reveal({
+        plugins: [Markdown],
+		hash: true,
+		hashOneBasedIndex: true,
+    });
+	deck.initialize().then(() => {
+		reveal.dataset.initialized = "true"
+	})
+}
+</script>

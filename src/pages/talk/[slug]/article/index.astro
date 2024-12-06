@@ -1,0 +1,39 @@
+---
+import { LinkButton } from "@astrojs/starlight/components"
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro"
+import { findTalkMany } from "#@/feature/talk/repository/getSlides.js"
+import { getTalkSlidePath } from "../_lib"
+
+type Params = {
+	slug: string
+}
+
+export async function getStaticPaths() {
+	const talkList = await findTalkMany()
+	return talkList.map(
+		(talk) =>
+			({
+				params: {
+					slug: talk.slug,
+				},
+				props: {
+					slug: talk.slug,
+					frontmatter: {
+						title: talk.data.title.replaceAll("<wbr>", ""),
+					},
+					render: talk.render,
+				},
+			}) satisfies Record<string, unknown> & { params: Params },
+	)
+}
+
+const { props } = Astro
+const { Content, headings } = await props.render()
+---
+
+<StarlightPage frontmatter={props.frontmatter} headings={headings}>
+	<div>
+		<LinkButton href={getTalkSlidePath(props.slug)}>スライドモード</LinkButton>
+	</div>
+	<Content />
+</StarlightPage>
