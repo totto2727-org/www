@@ -1,9 +1,0 @@
-/*
-TODO Starlightが対応次第、AstroのView Transition APIを利用して削除すること
-https://github.com/withastro/starlight/pull/694
- */
-@view-transition {
-	/* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
-	navigation: auto;
-}
-

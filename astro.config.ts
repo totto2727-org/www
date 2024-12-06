@@ -27,7 +27,6 @@ const starlightConfig = {
 			link: "/article",
 		},
 	],
-	customCss: ["./src/feature/primitive/global.css"],
 	lastUpdated: true,
 	locales: {
 		root: {
@@ -35,6 +34,16 @@ const starlightConfig = {
 			lang: "ja",
 		},
 	},
+	head: [
+		{
+			tag: "style",
+			content: `
+@view-transition {
+	navigation: auto;
+}
+`.trim(),
+		},
+	],
 } satisfies Parameters<typeof starlight>[0]
 
 const vite = {
