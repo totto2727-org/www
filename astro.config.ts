@@ -66,7 +66,10 @@ const vite = {
 } satisfies Parameters<typeof defineConfig>[0]["vite"]
 
 export default defineConfig({
-	prefetch: true,
+	prefetch: {
+		prefetchAll: true,
+		defaultStrategy: "viewport",
+	},
 	site: "https://www.totto2727.dev",
 	integrations: [svelte(), UnoCSS(), starlight(starlightConfig), mdx()],
 	vite,
