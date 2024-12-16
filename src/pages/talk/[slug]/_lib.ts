@@ -1,11 +1,11 @@
 export const getTalkArticlePath = (slug: string) => {
-	return `/talk/${slug}/article`
+  return `/talk/${slug}/article`
 }
 
 export const getTalkSlidePath = (slug: string) => {
-	return `/talk/${slug}/slide`
+  return `/talk/${slug}/slide`
 }
 
 export function getTalkOgpImagePath(slug: string) {
-	return `/talk/${slug}/ogp.png`
+  return `/talk/${slug}/ogp.png`
 }

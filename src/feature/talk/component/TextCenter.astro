@@ -1,6 +1,6 @@
 ---
 type Props = {
-	textAlign?: "center" | "left"
+  textAlign?: "center" | "left"
 }
 
 const { props } = Astro
@@ -11,17 +11,17 @@ const textAlign = props.textAlign ?? "center"
 
 <style>
 :global(.reveal) p {
-	margin-inline: auto;
-	display: block;
-	width: fit-content;
-	text-align: var(--text-align) !important;
+  margin-inline: auto;
+  display: block;
+  width: fit-content;
+  text-align: var(--text-align) !important;
 
-	&[data-text-align="center"] {
-		text-align: center !important;
-	}
+  &[data-text-align="center"] {
+    text-align: center !important;
+  }
 
-	&[data-text-align="left"] {
-		text-align: left !important;
-	}
+  &[data-text-align="left"] {
+    text-align: left !important;
+  }
 }
 </style>

@@ -5,18 +5,18 @@
  * ```
  */
 export {
-	pipe,
-	flow,
-	Effect as E,
-	Predicate as P,
-	String as S,
-	Number as N,
-	Iterable as I,
-	Array as A,
-	Tuple as T,
-	Types as Ty,
-	Record as R,
-	Boolean as B,
+  pipe,
+  flow,
+  Effect as E,
+  Predicate as P,
+  String as S,
+  Number as N,
+  Iterable as I,
+  Array as A,
+  Tuple as T,
+  Types as Ty,
+  Record as R,
+  Boolean as B,
 } from "effect"
 
 export { Result as PR } from "option-t/plain_result/namespace"

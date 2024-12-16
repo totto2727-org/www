@@ -3,31 +3,31 @@ import { SLIDE_HEIGHT, SLIDE_WIDTH } from "./const"
 import "./reveal.css"
 
 type Props = {
-	title: string
+  title: string
 }
 
 const { props } = Astro
 const html = (await Astro.slots.render("default")) as string
 const slidesHtml = html
-	.split("<hr/>")
-	.map((html) => `<section>${html}</section>`)
+  .split("<hr/>")
+  .map((html) => `<section>${html}</section>`)
 ---
 
 <div
-	class="reveal"
-	data-initialized="false"
-	style={{
-		"--slide-width": `${SLIDE_WIDTH}px`,
-		"--slide-height": `${SLIDE_HEIGHT}px`,
-	}}
+  class="reveal"
+  data-initialized="false"
+  style={{
+  	"--slide-width": `${SLIDE_WIDTH}px`,
+  	"--slide-height": `${SLIDE_HEIGHT}px`,
+  }}
 >
-	<div class="slides">
-		<section>
-			<h1><Fragment set:html={props.title} /></h1>
-		</section>
+  <div class="slides">
+    <section>
+      <h1><Fragment set:html={props.title} /></h1>
+    </section>
 
-		<Fragment set:html={slidesHtml} />
-	</div>
+    <Fragment set:html={slidesHtml} />
+  </div>
 </div>
 
 <script>

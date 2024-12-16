@@ -4,9 +4,5 @@ root = true
 [*]
 end_of_line = lf
 insert_final_newline = true
-indent_style = tab
-indent_size = 4
-
-[{package.json, *.yaml, *.md, *.mdx}]
 indent_style = space
 indent_size = 2

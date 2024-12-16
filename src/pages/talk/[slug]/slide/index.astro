@@ -8,25 +8,25 @@ import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
 import { getTalkArticlePath, getTalkOgpImagePath } from "../_lib"
 
 type Params = {
-	slug: string
+  slug: string
 }
 
 export async function getStaticPaths() {
-	const slideList = await findManyTalk()
-	return slideList.map(
-		(slide) =>
-			({
-				params: { slug: slide.slug.replace("talk/article", "") },
-				props: {
-					slug: slide.slug,
-					frontmatter: {
-						title: slide.data.title.replaceAll("<wbr/>", ""),
-					},
-					slideTitle: slide.data.title,
-					render: slide.render,
-				},
-			}) satisfies Record<string, unknown> & { params: Params },
-	)
+  const slideList = await findManyTalk()
+  return slideList.map(
+    (slide) =>
+      ({
+        params: { slug: slide.slug.replace("talk/article", "") },
+        props: {
+          slug: slide.slug,
+          frontmatter: {
+            title: slide.data.title.replaceAll("<wbr/>", ""),
+          },
+          slideTitle: slide.data.title,
+          render: slide.render,
+        },
+      }) satisfies Record<string, unknown> & { params: Params },
+  )
 }
 
 const { props } = Astro
@@ -36,27 +36,27 @@ const ogpImageUrl = new URL(ogpImagePath, Astro.url)
 ---
 
 <TalkSlideLayout
-	frontmatter={{
-		...props.frontmatter,
-		head: generateOgpObject({
-			title: generateTitle(props.frontmatter.title),
-			image: ogpImageUrl,
-			alt: props.frontmatter.title,
-		}),
-	}}
+  frontmatter={{
+  	...props.frontmatter,
+  	head: generateOgpObject({
+  		title: generateTitle(props.frontmatter.title),
+  		image: ogpImageUrl,
+  		alt: props.frontmatter.title,
+  	}),
+  }}
 >
-	<TalkSlide title={props.slideTitle}>
-		<Content />
-	</TalkSlide>
-	<div class="button-container">
-		<LinkButton href={getTalkArticlePath(props.slug)}>記事に戻る</LinkButton>
-	</div>
+  <TalkSlide title={props.slideTitle}>
+    <Content />
+  </TalkSlide>
+  <div class="button-container">
+    <LinkButton href={getTalkArticlePath(props.slug)}>記事に戻る</LinkButton>
+  </div>
 </TalkSlideLayout>
 
 <style>
 .button-container {
-	position: absolute;
-	bottom: calc(1.4em - (51px - 36px) / 2);
-	left: 0.75em;
+  position: absolute;
+  bottom: calc(1.4em - (51px - 36px) / 2);
+  left: 0.75em;
 }
 </style>

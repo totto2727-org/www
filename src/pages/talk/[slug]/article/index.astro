@@ -7,27 +7,27 @@ import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
 import { getTalkOgpImagePath, getTalkSlidePath } from "../_lib"
 
 type Params = {
-	slug: string
+  slug: string
 }
 
 export async function getStaticPaths() {
-	const talkList = await findManyTalk()
-	return talkList.map(
-		(talk) =>
-			({
-				params: {
-					slug: talk.slug,
-				},
-				props: {
-					id: talk.id,
-					slug: talk.slug,
-					frontmatter: {
-						title: talk.data.title.replaceAll("<wbr/>", ""),
-					},
-					render: talk.render,
-				},
-			}) satisfies Record<string, unknown> & { params: Params },
-	)
+  const talkList = await findManyTalk()
+  return talkList.map(
+    (talk) =>
+      ({
+        params: {
+          slug: talk.slug,
+        },
+        props: {
+          id: talk.id,
+          slug: talk.slug,
+          frontmatter: {
+            title: talk.data.title.replaceAll("<wbr/>", ""),
+          },
+          render: talk.render,
+        },
+      }) satisfies Record<string, unknown> & { params: Params },
+  )
 }
 
 const { props } = Astro
@@ -37,27 +37,27 @@ const ogpImageUrl = new URL(ogpImagePath, Astro.url)
 ---
 
 <StarlightPage
-	frontmatter={{
-		...props.frontmatter,
-		head: generateOgpObject({
-			title: generateTitle(props.frontmatter.title),
-			image: ogpImageUrl,
-			alt: props.frontmatter.title,
-		}),
-	}}
-	headings={headings}
+  frontmatter={{
+  	...props.frontmatter,
+  	head: generateOgpObject({
+  		title: generateTitle(props.frontmatter.title),
+  		image: ogpImageUrl,
+  		alt: props.frontmatter.title,
+  	}),
+  }}
+  headings={headings}
 >
-	<div>{`File ID: ${props.id}`}</div>
-	<div>
-		<LinkButton href={getTalkSlidePath(props.slug)}>スライドモード</LinkButton>
-	</div>
-	<hr />
-	<Content />
+  <div>{`File ID: ${props.id}`}</div>
+  <div>
+    <LinkButton href={getTalkSlidePath(props.slug)}>スライドモード</LinkButton>
+  </div>
+  <hr />
+  <Content />
 </StarlightPage>
 
 <style is:global>
 iframe {
-	width: 100%;
-	aspect-ratio: 16 / 9;
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }
 </style>
