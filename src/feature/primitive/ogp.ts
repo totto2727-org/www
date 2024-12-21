@@ -7,19 +7,15 @@ export function generateOgpObject({
   alt,
   description,
   image,
-  title,
   url,
 }: {
   alt: string
   description?: string
   image: URL
-  title: string
   url?: URL
 }): NonNullable<ComponentProps<typeof StarlightPage>['frontmatter']['head']> {
   const ogp = [
-    { attrs: { content: title, property: 'og:title' }, tag: 'meta' },
     { attrs: { content: 'website', property: 'og:type' }, tag: 'meta' },
-    { attrs: { content: 'ja_JP', property: 'og:locale' }, tag: 'meta' },
     { attrs: { content: image.href, property: 'og:image' }, tag: 'meta' },
     {
       attrs: { content: 'image/png', property: 'og:image:type' },

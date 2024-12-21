@@ -8,7 +8,12 @@ const articleList = await findManyArticle({
 ---
 
 <CardGrid>
-  {/* バグでフォーマットが安定しない */}
-  <!-- markup-fmt-ignore -->
-  {articleList.map(article => <LinkCard href={`/${article.slug}`} title={article.data.title} />)}
+  {articleList.map(
+    article => (
+      <LinkCard
+        href={`/${article.slug}`}
+        title={article.data.title}
+      />
+    ),
+  )}
 </CardGrid>

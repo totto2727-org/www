@@ -1,7 +1,7 @@
 import type { APIContext } from 'astro'
 
 import { generateOgImage } from '#@/feature/primitive/ogImage.jsx'
-import { findManyTalk } from '#@/feature/talk/repository/findManyTalk.js'
+import { getCollection } from 'astro:content'
 
 export async function GET(context: APIContext) {
   const props = context.props as Awaited<
@@ -12,10 +12,13 @@ export async function GET(context: APIContext) {
 }
 
 export async function getStaticPaths() {
-  const talkList = await findManyTalk()
-  return talkList.map(talk => ({
+  const articleList = await getCollection(
+    'docs',
+    v => v.slug.startsWith('article/') && !v.data.draft,
+  )
+  return articleList.map(talk => ({
     params: {
-      slug: talk.slug,
+      slug: talk.slug.replace('article/', ''),
     },
     props: {
       titleSplitted: talk.data.title.split('<wbr/>'),

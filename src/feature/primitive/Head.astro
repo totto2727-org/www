@@ -1,0 +1,63 @@
+---
+import type StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import type { Props } from '@astrojs/starlight/props'
+import type { ComponentProps } from 'astro/types'
+
+import { SITE, TITLE } from '#@/const.js'
+import Default from '@astrojs/starlight/components/Head.astro'
+import path from 'node:path'
+
+import { generateOgpObject } from './ogp'
+
+const { props } = Astro
+
+const viewTransition = `
+@view-transition {
+  navigation: auto;
+}
+`.trim()
+
+let head: NonNullable<
+  ComponentProps<typeof StarlightPage>['frontmatter']['head']
+>
+
+const baseHead = {
+  content: viewTransition,
+  tag: 'style',
+} as const
+
+if (Astro.url.pathname.startsWith('/article/')) {
+  function generateOgpUrl(slug: string) {
+    return new URL(path.join('/', slug, 'ogp.png'), Astro.url)
+  }
+
+  const additionalHead = generateOgpObject({
+    alt: props.entry.data.title,
+    image: generateOgpUrl(props.entry.slug),
+  })
+
+  head = [
+    baseHead,
+    // @ts-expect-error
+    ...Astro.props.headings,
+    // @ts-expect-error
+    ...additionalHead,
+  ]
+}
+ else {
+  head = [
+    baseHead,
+    ...generateOgpObject({
+      alt: TITLE,
+      image: new URL('/ogp.png', SITE),
+    }),
+  ]
+}
+---
+
+<Default {...Astro.props} {head} />
+{
+  head.map(({ attrs, content, tag: Tag = 'meta' }) => (
+    <Tag {...attrs} set:html={content} />
+  ))
+}

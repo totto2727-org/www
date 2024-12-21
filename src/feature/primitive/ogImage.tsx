@@ -1,8 +1,6 @@
 /** @jsxImportSource react */
 
 import { ImageResponse } from '@vercel/og'
-// @ts-expect-error Need to be imported to use jsx
-import React from 'react'
 
 export function generateOgImage(titleSplitted: string[]) {
   return new ImageResponse(

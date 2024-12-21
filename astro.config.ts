@@ -1,9 +1,9 @@
 import { SITE, TITLE } from '#@/const.js'
 import { customCollections } from '#@/feature/primitive/icon-unocss.js'
-import { generateOgpObject } from '#@/feature/primitive/ogp.js'
 import mdx from '@astrojs/mdx'
 import starlight from '@astrojs/starlight'
 import svelte from '@astrojs/svelte'
+import react from '@vitejs/plugin-react'
 import { defineConfig } from 'astro/config'
 import browserslist from 'browserslist'
 import { browserslistToTargets } from 'lightningcss'
@@ -11,21 +11,12 @@ import UnoCSS from 'unocss/astro'
 import Icons from 'unplugin-icons/vite'
 
 const starlightConfig = {
-  head: [
-    {
-      content: `
-@view-transition {
-  navigation: auto;
-}
-`.trim(),
-      tag: 'style',
-    },
-    ...generateOgpObject({
-      alt: TITLE,
-      image: new URL('/ogp.png', SITE),
-      title: TITLE,
-    }),
-  ],
+  components: {
+    Head: '#@/feature/primitive/Head.astro',
+  },
+  editLink: {
+    baseUrl: 'https://github.com/totto2727-org/www',
+  },
   lastUpdated: true,
   locales: {
     root: {
@@ -64,6 +55,7 @@ const vite = {
     transformer: 'lightningcss',
   },
   plugins: [
+    react({ include: /\.tsx$/ }),
     Icons({
       compiler: 'astro',
       customCollections,
