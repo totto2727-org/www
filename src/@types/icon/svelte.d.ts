@@ -1,6 +1,7 @@
-declare module "icon:svelte/*" {
-  import { SvelteComponent } from "svelte"
-  import type { SvelteHTMLElements } from "svelte/elements"
+declare module 'icon:svelte/*' {
+  import type { SvelteHTMLElements } from 'svelte/elements'
 
-  export default class extends SvelteComponent<SvelteHTMLElements["svg"]> {}
+  import { SvelteComponent } from 'svelte'
+
+  export default class extends SvelteComponent<SvelteHTMLElements['svg']> {}
 }

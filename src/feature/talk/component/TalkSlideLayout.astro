@@ -1,16 +1,20 @@
 ---
 // @ts-nocheck
+// eslint-disable-next-line antfu/no-import-node-modules-by-path
 import {
-  type StarlightPageProps as Props,
   generateStarlightPageRouteData,
-} from "#@/../node_modules/@astrojs/starlight/utils/starlight-page.js"
-import TalkSlidePage from "./TalkSlidePage.astro"
+  type StarlightPageProps as Props,
+} from '../../../../node_modules/@astrojs/starlight/utils/starlight-page.js'
+import TalkSlidePage from './TalkSlidePage.astro'
 
-export type StarlightPageProps = Props
+export type StarlightPageProps = Props;
 ---
 
 <TalkSlidePage
-  {...await generateStarlightPageRouteData({ props: Astro.props, url: Astro.url })}
+  {...await generateStarlightPageRouteData({
+    props: Astro.props,
+    url: Astro.url,
+  })}
 >
   <slot />
 </TalkSlidePage>

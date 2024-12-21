@@ -1,6 +1,6 @@
 ---
-import { CardGrid, LinkCard } from "@astrojs/starlight/components"
-import { findManyArticle } from "#@/feature/article/repository/findManyArticle.js"
+import { findManyArticle } from '#@/feature/article/repository/findManyArticle.js'
+import { CardGrid, LinkCard } from '@astrojs/starlight/components'
 
 const articleList = await findManyArticle({
   includesDraft: import.meta.env.DEV,
@@ -10,14 +10,5 @@ const articleList = await findManyArticle({
 <CardGrid>
   {/* バグでフォーマットが安定しない */}
   <!-- markup-fmt-ignore -->
-  {
-		articleList.map((article) => (
-			(
-			<LinkCard
-				title={article.data.title}
-				href={`/${article.slug}`}
-			/>
-		)
-		))
-	}
+  {articleList.map(article => <LinkCard href={`/${article.slug}`} title={article.data.title} />)}
 </CardGrid>

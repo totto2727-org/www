@@ -1,69 +1,95 @@
 {
   "prettier.enable": false,
-  "eslint.enable": false,
-  "biome.enabled": true,
-  "editor.defaultFormatter": "dprint.dprint",
+  "biome.enabled": false,
+  "editor.formatOnSave": false,
+  "eslint.enable": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit",
-    "quickfix.biome": "explicit"
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
   },
   "css.lint.unknownAtRules": "ignore",
-  "explorer.fileNesting.patterns": {
-    "*.mist.css": "${capture}.mist.*"
-  },
   "astro.updateImportsOnFileMove.enabled": true,
   "astro.content-intellisense": true,
-  "unocss.include": ["src/**/*.css"],
-  "[javascript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[astro]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[svelte]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[csv]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[toml]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[dockerfile]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "dprint.dprint"
-  },
+  "unocss.include": [
+    "src/**/*.css"
+  ],
   "markdownlint.config": {
     "MD010": false,
     "MD033": false
-  }
+  },
+  "eslint.rules.customizations": [
+    {
+      "rule": "style/*",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "format/*",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-indent",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-spacing",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-spaces",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-order",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-dangle",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-newline",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*quotes",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*semi",
+      "severity": "off",
+      "fixable": true
+    }
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "json5",
+    "jsonc",
+    "yaml",
+    "toml",
+    "xml",
+    "gql",
+    "graphql",
+    "astro",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
+  ]
 }

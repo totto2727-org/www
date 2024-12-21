@@ -1,23 +1,27 @@
 ---
 // @ts-nocheck
-import Head from "virtual:starlight/components/Head"
-import ThemeProvider from "virtual:starlight/components/ThemeProvider"
-
-import "#@/../node_modules/@astrojs/starlight/style/props.css"
-import "#@/../node_modules/@astrojs/starlight/style/reset.css"
-import "#@/../node_modules/@astrojs/starlight/style/shiki.css"
-import "#@/../node_modules/@astrojs/starlight/style/util.css"
-import "#@/../node_modules/@astrojs/starlight/style/asides.css"
-import "virtual:starlight/user-css"
+import Head from 'virtual:starlight/components/Head'
+import ThemeProvider from 'virtual:starlight/components/ThemeProvider'
+// eslint-disable-next-line antfu/no-import-node-modules-by-path
+import '#@/../node_modules/@astrojs/starlight/style/props.css'
+// eslint-disable-next-line antfu/no-import-node-modules-by-path
+import '#@/../node_modules/@astrojs/starlight/style/reset.css'
+// eslint-disable-next-line antfu/no-import-node-modules-by-path
+import '#@/../node_modules/@astrojs/starlight/style/shiki.css'
+// eslint-disable-next-line antfu/no-import-node-modules-by-path
+import '#@/../node_modules/@astrojs/starlight/style/util.css'
+// eslint-disable-next-line antfu/no-import-node-modules-by-path
+import '#@/../node_modules/@astrojs/starlight/style/asides.css'
+import 'virtual:starlight/user-css';
 ---
 
 <html
-  lang={Astro.props.lang}
-  dir={Astro.props.dir}
-  data-has-toc={Boolean(Astro.props.toc)}
-  data-has-sidebar={Astro.props.hasSidebar}
   data-has-hero={Boolean(Astro.props.entry.data.hero)}
+  data-has-sidebar={Astro.props.hasSidebar}
+  data-has-toc={Boolean(Astro.props.toc)}
   data-theme="dark"
+  dir={Astro.props.dir}
+  lang={Astro.props.lang}
 >
   <head>
     <Head {...Astro.props} />

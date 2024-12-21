@@ -1,21 +1,8 @@
 ---
-import { CardGrid, LinkCard } from "@astrojs/starlight/components"
-import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
+import { findManyTalk } from '#@/feature/talk/repository/findManyTalk.js'
+import { CardGrid, LinkCard } from '@astrojs/starlight/components'
 
 const slides = await findManyTalk()
 ---
 
-<CardGrid>
-  {/* バグでフォーマットが安定しない */}
-  <!-- markup-fmt-ignore -->
-  {
-		slides.map((slide) => (
-			(
-			<LinkCard
-				title={slide.data.title}
-				href={`/talk/${slide.slug}/article`}
-			/>
-		)
-		))
-	}
-</CardGrid>
+<CardGrid>{slides.map(slide => <LinkCard href={`/talk/${slide.slug}/article`} title={slide.data.title} />)}</CardGrid>

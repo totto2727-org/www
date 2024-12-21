@@ -1,11 +1,12 @@
 ---
-import { LinkButton } from "@astrojs/starlight/components"
-import { generateTitle } from "#@/const.js"
-import { generateOgpObject } from "#@/feature/primitive/ogp.js"
-import TalkSlide from "#@/feature/talk/component/TalkSlide.astro"
-import TalkSlideLayout from "#@/feature/talk/component/TalkSlideLayout.astro"
-import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
-import { getTalkArticlePath, getTalkOgpImagePath } from "../_lib"
+import { generateTitle } from '#@/const.js'
+import { generateOgpObject } from '#@/feature/primitive/ogp.js'
+import TalkSlide from '#@/feature/talk/component/TalkSlide.astro'
+import TalkSlideLayout from '#@/feature/talk/component/TalkSlideLayout.astro'
+import { findManyTalk } from '#@/feature/talk/repository/findManyTalk.js'
+import { LinkButton } from '@astrojs/starlight/components'
+
+import { getTalkArticlePath, getTalkOgpImagePath } from '../_lib'
 
 type Params = {
   slug: string
@@ -14,16 +15,16 @@ type Params = {
 export async function getStaticPaths() {
   const slideList = await findManyTalk()
   return slideList.map(
-    (slide) =>
+    slide =>
       ({
-        params: { slug: slide.slug.replace("talk/article", "") },
+        params: { slug: slide.slug.replace('talk/article', '') },
         props: {
-          slug: slide.slug,
           frontmatter: {
-            title: slide.data.title.replaceAll("<wbr/>", ""),
+            title: slide.data.title.replaceAll('<wbr/>', ''),
           },
-          slideTitle: slide.data.title,
           render: slide.render,
+          slideTitle: slide.data.title,
+          slug: slide.slug,
         },
       }) satisfies Record<string, unknown> & { params: Params },
   )
@@ -37,12 +38,12 @@ const ogpImageUrl = new URL(ogpImagePath, Astro.url)
 
 <TalkSlideLayout
   frontmatter={{
-  	...props.frontmatter,
-  	head: generateOgpObject({
-  		title: generateTitle(props.frontmatter.title),
-  		image: ogpImageUrl,
-  		alt: props.frontmatter.title,
-  	}),
+    ...props.frontmatter,
+    head: generateOgpObject({
+      alt: props.frontmatter.title,
+      image: ogpImageUrl,
+      title: generateTitle(props.frontmatter.title),
+    }),
   }}
 >
   <TalkSlide title={props.slideTitle}>
@@ -54,9 +55,9 @@ const ogpImageUrl = new URL(ogpImagePath, Astro.url)
 </TalkSlideLayout>
 
 <style>
-.button-container {
-  position: absolute;
-  bottom: calc(1.4em - (51px - 36px) / 2);
-  left: 0.75em;
-}
+  .button-container {
+    position: absolute;
+    bottom: calc(1.4em - (51px - 36px) / 2);
+    left: 0.75em;
+  }
 </style>

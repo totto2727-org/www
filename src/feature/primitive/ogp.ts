@@ -1,56 +1,56 @@
-// @ts-ignore Astro ComponentProps
-import type StarlightPage from "@astrojs/starlight/components/StarlightPage.astro"
-import type { ComponentProps } from "astro/types"
-import { P, S } from "#@/feature/effect.js"
+import type StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import type { ComponentProps } from 'astro/types'
+
+import { P, S } from '#@/feature/effect.js'
 
 export function generateOgpObject({
-  image,
   alt,
-  url,
-  title,
   description,
+  image,
+  title,
+  url,
 }: {
-  title: string
-  image: URL
   alt: string
-  url?: URL
   description?: string
-}): NonNullable<ComponentProps<typeof StarlightPage>["frontmatter"]["head"]> {
+  image: URL
+  title: string
+  url?: URL
+}): NonNullable<ComponentProps<typeof StarlightPage>['frontmatter']['head']> {
   const ogp = [
-    { tag: "meta", attrs: { property: "og:title", content: title } },
-    { tag: "meta", attrs: { property: "og:type", content: "website" } },
-    { tag: "meta", attrs: { property: "og:locale", content: "ja_JP" } },
-    { tag: "meta", attrs: { property: "og:image", content: image.href } },
+    { attrs: { content: title, property: 'og:title' }, tag: 'meta' },
+    { attrs: { content: 'website', property: 'og:type' }, tag: 'meta' },
+    { attrs: { content: 'ja_JP', property: 'og:locale' }, tag: 'meta' },
+    { attrs: { content: image.href, property: 'og:image' }, tag: 'meta' },
     {
-      tag: "meta",
-      attrs: { property: "og:image:type", content: "image/png" },
+      attrs: { content: 'image/png', property: 'og:image:type' },
+      tag: 'meta',
     },
-    { tag: "meta", attrs: { property: "og:image:alt", content: alt } },
-    { tag: "meta", attrs: { property: "og:image:width", content: "1200" } },
-    { tag: "meta", attrs: { property: "og:image:height", content: "630" } },
+    { attrs: { content: alt, property: 'og:image:alt' }, tag: 'meta' },
+    { attrs: { content: '1200', property: 'og:image:width' }, tag: 'meta' },
+    { attrs: { content: '630', property: 'og:image:height' }, tag: 'meta' },
     {
-      tag: "meta",
-      attrs: { name: "twitter:card", content: "summary_large_image" },
+      attrs: { content: 'summary_large_image', name: 'twitter:card' },
+      tag: 'meta',
     },
-    { tag: "meta", attrs: { name: "twitter:site", content: "@totto2727" } },
+    { attrs: { content: '@totto2727', name: 'twitter:site' }, tag: 'meta' },
     {
-      tag: "meta",
-      attrs: { name: "twitter:creator", content: "@totto2727" },
+      attrs: { content: '@totto2727', name: 'twitter:creator' },
+      tag: 'meta',
     },
-  ] satisfies ComponentProps<typeof StarlightPage>["frontmatter"]["head"]
+  ] satisfies ComponentProps<typeof StarlightPage>['frontmatter']['head']
 
   if (P.isNotNullable(description) && S.isNonEmpty(description)) {
     ogp.push({
-      tag: "meta",
-      attrs: { property: "og:description", content: description },
+      attrs: { content: description, property: 'og:description' },
+      tag: 'meta',
     } as const)
   }
 
   // Astroで自動生成される
   if (P.isNotNullable(url)) {
     ogp.push({
-      tag: "meta",
-      attrs: { property: "og:url", content: url.href },
+      attrs: { content: url.href, property: 'og:url' },
+      tag: 'meta',
     } as const)
   }
 

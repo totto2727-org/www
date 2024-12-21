@@ -1,92 +1,92 @@
-import mdx from "@astrojs/mdx"
-import starlight from "@astrojs/starlight"
-import svelte from "@astrojs/svelte"
-import { defineConfig } from "astro/config"
-import browserslist from "browserslist"
-import { browserslistToTargets } from "lightningcss"
-import UnoCSS from "unocss/astro"
-import Icons from "unplugin-icons/vite"
-import { SITE, TITLE } from "#@/const.js"
-import { customCollections } from "#@/feature/primitive/icon-unocss.js"
-import { generateOgpObject } from "#@/feature/primitive/ogp.js"
+import { SITE, TITLE } from '#@/const.js'
+import { customCollections } from '#@/feature/primitive/icon-unocss.js'
+import { generateOgpObject } from '#@/feature/primitive/ogp.js'
+import mdx from '@astrojs/mdx'
+import starlight from '@astrojs/starlight'
+import svelte from '@astrojs/svelte'
+import { defineConfig } from 'astro/config'
+import browserslist from 'browserslist'
+import { browserslistToTargets } from 'lightningcss'
+import UnoCSS from 'unocss/astro'
+import Icons from 'unplugin-icons/vite'
 
 const starlightConfig = {
-  title: TITLE,
-  logo: {
-    src: "/src/assets/totto2727.webp",
-    replacesTitle: true,
-  },
-  social: {
-    github: "https://github.com/totto2727",
-  },
-  sidebar: [
+  head: [
     {
-      label: "Talk",
-      link: "/talk",
+      content: `
+@view-transition {
+  navigation: auto;
+}
+`.trim(),
+      tag: 'style',
     },
-    {
-      label: "Article",
-      link: "/article",
-    },
+    ...generateOgpObject({
+      alt: TITLE,
+      image: new URL('/ogp.png', SITE),
+      title: TITLE,
+    }),
   ],
   lastUpdated: true,
   locales: {
     root: {
-      label: "日本語",
-      lang: "ja",
+      label: '日本語',
+      lang: 'ja',
     },
   },
-  head: [
+  logo: {
+    replacesTitle: true,
+    src: '/src/assets/totto2727.webp',
+  },
+  sidebar: [
     {
-      tag: "style",
-      content: `
-@view-transition {
-	navigation: auto;
-}
-`.trim(),
+      label: 'Talk',
+      link: '/talk',
     },
-    ...generateOgpObject({
-      title: TITLE,
-      image: new URL("/ogp.png", SITE),
-      alt: TITLE,
-    }),
+    {
+      label: 'Article',
+      link: '/article',
+    },
   ],
+  social: {
+    github: 'https://github.com/totto2727',
+  },
+  title: TITLE,
 } satisfies Parameters<typeof starlight>[0]
 
 const vite = {
-  css: {
-    transformer: "lightningcss",
-    lightningcss: {
-      targets: browserslistToTargets(browserslist(">= 0.25%")),
-    },
-  },
   build: {
-    cssMinify: "lightningcss",
+    cssMinify: 'lightningcss',
   },
-  resolve: {
-    alias: [
-      { find: "icon:svelte", replacement: "~icons" },
-      { find: "icon:astro", replacement: "~icons" },
-    ],
+  css: {
+    lightningcss: {
+      targets: browserslistToTargets(browserslist('>= 0.25%')),
+    },
+    transformer: 'lightningcss',
   },
   plugins: [
     Icons({
-      compiler: "astro",
+      compiler: 'astro',
       customCollections,
     }),
     Icons({
-      compiler: "svelte",
+      compiler: 'svelte',
       customCollections,
     }),
   ],
-} satisfies Parameters<typeof defineConfig>[0]["vite"]
+  resolve: {
+    alias: [
+      { find: 'icon:svelte', replacement: '~icons' },
+      { find: 'icon:astro', replacement: '~icons' },
+    ],
+  },
+} satisfies Parameters<typeof defineConfig>[0]['vite']
 
 export default defineConfig({
+  integrations: [svelte(), UnoCSS(), starlight(starlightConfig), mdx()],
   prefetch: {
+    defaultStrategy: 'viewport',
     prefetchAll: true,
-    defaultStrategy: "viewport",
   },
   site: SITE,
-  integrations: [svelte(), UnoCSS(), starlight(starlightConfig), mdx()],
   vite,
 })

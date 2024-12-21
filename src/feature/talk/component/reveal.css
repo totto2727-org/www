@@ -1,5 +1,5 @@
-@import "/node_modules/reveal.js/dist/reveal.css";
-@import "/node_modules/reveal.js/dist/theme/black.css";
+@import '/node_modules/reveal.js/dist/reveal.css';
+@import '/node_modules/reveal.js/dist/theme/black.css';
 
 body {
   height: 100dvh;
@@ -19,7 +19,7 @@ body {
   height: 100%;
   animation: fade 0.5s ease-in;
 
-  &[data-initialized="false"] {
+  &[data-initialized='false'] {
     opacity: 0;
   }
 

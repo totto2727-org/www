@@ -1,10 +1,11 @@
 ---
-import { LinkButton } from "@astrojs/starlight/components"
-import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro"
-import { generateTitle } from "#@/const.js"
-import { generateOgpObject } from "#@/feature/primitive/ogp.js"
-import { findManyTalk } from "#@/feature/talk/repository/findManyTalk.js"
-import { getTalkOgpImagePath, getTalkSlidePath } from "../_lib"
+import { generateTitle } from '#@/const.js'
+import { generateOgpObject } from '#@/feature/primitive/ogp.js'
+import { findManyTalk } from '#@/feature/talk/repository/findManyTalk.js'
+import { LinkButton } from '@astrojs/starlight/components'
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+
+import { getTalkOgpImagePath, getTalkSlidePath } from '../_lib'
 
 type Params = {
   slug: string
@@ -13,18 +14,18 @@ type Params = {
 export async function getStaticPaths() {
   const talkList = await findManyTalk()
   return talkList.map(
-    (talk) =>
+    talk =>
       ({
         params: {
           slug: talk.slug,
         },
         props: {
-          id: talk.id,
-          slug: talk.slug,
           frontmatter: {
-            title: talk.data.title.replaceAll("<wbr/>", ""),
+            title: talk.data.title.replaceAll('<wbr/>', ''),
           },
+          id: talk.id,
           render: talk.render,
+          slug: talk.slug,
         },
       }) satisfies Record<string, unknown> & { params: Params },
   )
@@ -38,12 +39,12 @@ const ogpImageUrl = new URL(ogpImagePath, Astro.url)
 
 <StarlightPage
   frontmatter={{
-  	...props.frontmatter,
-  	head: generateOgpObject({
-  		title: generateTitle(props.frontmatter.title),
-  		image: ogpImageUrl,
-  		alt: props.frontmatter.title,
-  	}),
+    ...props.frontmatter,
+    head: generateOgpObject({
+      alt: props.frontmatter.title,
+      image: ogpImageUrl,
+      title: generateTitle(props.frontmatter.title),
+    }),
   }}
   headings={headings}
 >
@@ -56,8 +57,8 @@ const ogpImageUrl = new URL(ogpImagePath, Astro.url)
 </StarlightPage>
 
 <style is:global>
-iframe {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-}
+  iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
 </style>
