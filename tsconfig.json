@@ -5,5 +5,5 @@
     "noUncheckedIndexedAccess": false,
     "skipLibCheck": true
   },
-  "exclude": ["dist"]
+  "include": ["*.ts", "*.tsx", "src/**/*", ".astro/**/*.d.ts"]
 }
